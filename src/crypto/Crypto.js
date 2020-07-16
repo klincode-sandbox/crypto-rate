@@ -8,7 +8,8 @@ class Crypto extends Component {
     super(props);
     this.state = {
       cryptoData: [],
-      cryptoDataPrev: {},
+      filteredCryptoData: [],
+      isUpdated: false
     }
   }
 
@@ -17,11 +18,9 @@ class Crypto extends Component {
       (item) => {
         let objectWithKey = data[item];
         objectWithKey['key'] = item;
+        objectWithKey['status'] = 'equal'
         return objectWithKey
       })
-
-    this.setState({ cryptoData: dataToArray })
-    console.log(dataToArray);
     return dataToArray
   }
 
@@ -30,27 +29,54 @@ class Crypto extends Component {
     Axios.get('https://blockchain.info/pl/ticker')
       .then(response => {
         const cryptoData = response.data;
-        this.dataToArray(cryptoData)
+        const cryptoDataArray = this.dataToArray(cryptoData);
+        this.setState({ cryptoData: cryptoDataArray, filteredCryptoData: cryptoDataArray })
+
       })
-  }
-  componentDidMount() {
-    // this.tick();
-    this.getData();
   }
 
   tick = () => {
     this.handleTick = setInterval(
       () => {
         this.getData();
-      }, 30000
+      }, 50000
     )
+  }
+  filter = (value) => {
+    // console.log(value.toUpperCase());
+    let filteredItems = this.state.cryptoData;
+    let newFilteredArray = filteredItems.filter(item => {
+      return item.key.toUpperCase().includes(value.toUpperCase())
+    })
+    this.setState({ filteredCryptoData: newFilteredArray })
+  }
+  componentDidMount() {
+    this.tick();
+    this.getData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    //jeżeli poprzednia cena była inna od aktualnej zaktualizuj pole status [down,up,equal]
+    if (prevState.cryptoData !== this.state.cryptoData) {
+      const cryptoDataWithStatus = this.state.cryptoData;
+      for (let i = 0; i < prevState.cryptoData.length; i++) {
+        if (prevState.cryptoData[i].buy > this.state.cryptoData[i].buy) {
+          //spadek ceny
+          cryptoDataWithStatus[i]['status'] = 'down'
+        } else if (prevState.cryptoData[i].buy < this.state.cryptoData[i].buy) {
+          cryptoDataWithStatus[i]['status'] = 'up'
+        } else
+          cryptoDataWithStatus[i]['status'] = 'equal'
+      }
+      this.setState({ cryptoData: cryptoDataWithStatus })
+    }
   }
   render() {
     return (
       <>
         <Header />
-        <Filter />
-        <CryptoList data={this.state.cryptoData} />
+        <Filter filterMethod={this.filter} />
+        <CryptoList data={this.state.filteredCryptoData} />
       </>
     );
   }

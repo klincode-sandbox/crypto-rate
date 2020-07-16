@@ -2,18 +2,26 @@ import React, { Component } from 'react';
 import './css/CryptoItem.css'
 const CryptoItem = (props) => {
   const arrows = {
-    up: String.fromCharCode('8596'),
+    up: String.fromCharCode('8593'),
     down: String.fromCharCode('8595'),
-    leftRight: String.fromCharCode('8596')
+    equal: String.fromCharCode('8596')
   }
-  // const arrow = ;
-  const { data: { buy, key, symbol } } = props;
+  const { data: { buy, key, symbol, status } } = props;
+  let arrowSymbol = 'equal';
+  let valueClass = 'value '
+  switch (status) {
+    case 'equal': { arrowSymbol = arrows.equal; valueClass = 'value equal'; break };
+    case 'up': { arrowSymbol = arrows.up; valueClass = 'value up'; break; }
+    case 'down': { arrowSymbol = arrows.down; valueClass = 'value down'; break; }
+    default: arrowSymbol = ''
+  }
+
 
   console.log(props);
   return (
     <li className='crypto-item'>
       <span className="title">Last rate: </span>
-      <span className="value">{buy}  </span>
+      <span className={valueClass}>{buy} {arrowSymbol}</span>
       <span className="symbol">{key} [{symbol}] </span>
 
     </li>

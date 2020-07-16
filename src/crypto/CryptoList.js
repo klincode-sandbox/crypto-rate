@@ -3,7 +3,7 @@ import CryptoItem from './CryptoItem'
 import './css/CryptoList.css'
 
 const CryptoList = ({ data }) => {
-  const list = data.map((item, index) => <CryptoItem data={item} />)
+  const list = data.map((item, index) => <CryptoItem key={index} data={item} />)
   return (
     <ul className='crypto-list'>
       {list}

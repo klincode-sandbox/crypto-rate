@@ -2,6 +2,8 @@
   padding: 10px 20px;
   margin: 0;
   border-bottom: 1px solid silver;
+  display: flex;
+  justify-content: space-between;
 }
 
 .crypto-item:hover {
@@ -19,4 +21,20 @@ span.symbol {
 
 span.symbol {
   text-transform: uppercase;
+}
+
+span.value {
+  font-weight: bold;
+}
+
+span.up {
+  color: #77a078;
+}
+
+span.equal {
+  color: rgb(4, 19, 228);
+}
+
+span.down {
+  color: rgb(212, 16, 16);
 }
