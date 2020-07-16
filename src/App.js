@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import Crypto from './crypto/Crypto'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-
-      </header>
+      <Crypto />
     </div>
   );
 }

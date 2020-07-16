@@ -1,0 +1,10 @@
+input {
+  padding: 10px 20px;
+}
+
+input:hover,
+input:focus {
+  border: 2px solid #90b3d5;
+  box-shadow: 0 0 5px -2px #90b3d5;
+  outline: 0;
+}

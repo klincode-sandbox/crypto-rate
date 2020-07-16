@@ -1,0 +1,13 @@
+.crypto-item {
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid silver;
+}
+
+.crypto-item:hover {
+  background-color: rgba(192, 192, 192, 0.158);
+}
+
+.crypto-item:last-child {
+  border-bottom: 0;
+}

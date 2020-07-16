@@ -1,0 +1,7 @@
+.crypto-list {
+  border: 1px solid silver;
+  list-style: none;
+  width: 300px;
+  margin: 20px auto;
+  padding: 0;
+}
