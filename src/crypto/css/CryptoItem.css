@@ -11,3 +11,12 @@
 .crypto-item:last-child {
   border-bottom: 0;
 }
+
+span.title,
+span.symbol {
+  font-weight: bold;
+}
+
+span.symbol {
+  text-transform: uppercase;
+}

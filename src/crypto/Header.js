@@ -3,7 +3,6 @@ import './css/Header.css'
 
 const Header = () => {
   const logo = process.env.PUBLIC_URL + 'BC_Logo.png'
-  // process.env.PUBLIC_URL + "/img/profile.jpg
   return (
     <header>
       <img src={logo} alt="Crypto rate logo" />

@@ -1,17 +1,23 @@
 header {
   background-color: #272a33;
   padding: 20px 10px 40px 10px;
-  margin-bottom: 20px
+  margin-bottom: 20px;
+
 }
 
 header img {
   width: 100px;
   animation: rotate 1s normal 1s forwards ease-in-out;
+  transition: 0.3s;
 }
 
 h1 {
   color: rgba(255, 255, 255, 0.767);
   font-weight: lighter;
+}
+
+.rotate {
+  transform: rotate(36deg);
 }
 
 @keyframes rotate {

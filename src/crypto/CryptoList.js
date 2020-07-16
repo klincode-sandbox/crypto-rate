@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import CryptoItem from './CryptoItem'
 import './css/CryptoList.css'
 
-const CryptoList = () => {
+const CryptoList = ({ data }) => {
+  const list = data.map((item, index) => <CryptoItem data={item} />)
   return (
     <ul className='crypto-list'>
-      <CryptoItem />
-      <CryptoItem />
-      <CryptoItem />
-      <CryptoItem />
-      <CryptoItem />
-      <CryptoItem />
-      <CryptoItem />
-      <CryptoItem />
+      {list}
     </ul>
   );
 }
