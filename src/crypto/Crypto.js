@@ -30,17 +30,23 @@ class Crypto extends Component {
       .then(response => {
         const cryptoData = response.data;
         const cryptoDataArray = this.dataToArray(cryptoData);
-        this.setState({ cryptoData: cryptoDataArray, filteredCryptoData: cryptoDataArray })
+        this.setState({ cryptoData: cryptoDataArray, filteredCryptoData: cryptoDataArray, isUpdated: true })
 
       })
   }
+
+
 
   tick = () => {
     this.handleTick = setInterval(
       () => {
         this.getData();
-      }, 50000
+      }, 5000
     )
+    setInterval(() => {
+      this.setState({ isUpdated: false })
+      console.log('ok');
+    }, 1000);
   }
   filter = (value) => {
     // console.log(value.toUpperCase());
@@ -56,12 +62,12 @@ class Crypto extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+
     //jeżeli poprzednia cena była inna od aktualnej zaktualizuj pole status [down,up,equal]
     if (prevState.cryptoData !== this.state.cryptoData) {
       const cryptoDataWithStatus = this.state.cryptoData;
       for (let i = 0; i < prevState.cryptoData.length; i++) {
         if (prevState.cryptoData[i].buy > this.state.cryptoData[i].buy) {
-          //spadek ceny
           cryptoDataWithStatus[i]['status'] = 'down'
         } else if (prevState.cryptoData[i].buy < this.state.cryptoData[i].buy) {
           cryptoDataWithStatus[i]['status'] = 'up'
@@ -74,7 +80,7 @@ class Crypto extends Component {
   render() {
     return (
       <>
-        <Header />
+        <Header rotate={this.state.isUpdated} />
         <Filter filterMethod={this.filter} />
         <CryptoList data={this.state.filteredCryptoData} />
       </>

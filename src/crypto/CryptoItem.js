@@ -17,7 +17,6 @@ const CryptoItem = (props) => {
   }
 
 
-  console.log(props);
   return (
     <li className='crypto-item'>
       <span className="title">Last rate: </span>
