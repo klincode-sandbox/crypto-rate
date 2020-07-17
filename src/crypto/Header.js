@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/Header.css'
 
 const Header = (props) => {
-  console.log(props.rotate);
+  // console.log(props.rotate);
   const logo = process.env.PUBLIC_URL + 'BC_Logo.png'
   return (
     <header>

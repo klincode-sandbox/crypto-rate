@@ -9,7 +9,8 @@ class Crypto extends Component {
     this.state = {
       cryptoData: [],
       filteredCryptoData: [],
-      isUpdated: false
+      isUpdated: false,
+      filterValue: ''
     }
   }
 
@@ -30,8 +31,9 @@ class Crypto extends Component {
       .then(response => {
         const cryptoData = response.data;
         const cryptoDataArray = this.dataToArray(cryptoData);
-        this.setState({ cryptoData: cryptoDataArray, filteredCryptoData: cryptoDataArray, isUpdated: true })
 
+        this.setState({ cryptoData: cryptoDataArray, filteredCryptoData: cryptoDataArray, isUpdated: true })
+        this.filter(this.state.filterValue);
       })
   }
 
@@ -54,7 +56,7 @@ class Crypto extends Component {
     let newFilteredArray = filteredItems.filter(item => {
       return item.key.toUpperCase().includes(value.toUpperCase())
     })
-    this.setState({ filteredCryptoData: newFilteredArray })
+    this.setState({ filteredCryptoData: newFilteredArray, filterValue: value })
   }
   componentDidMount() {
     this.tick();
