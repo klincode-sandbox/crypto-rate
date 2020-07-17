@@ -43,13 +43,13 @@ class Crypto extends Component {
         this.getData();
       }, 5000
     )
+    //to pewnie można rozwiązać dużo lepiej ?  
     setInterval(() => {
       this.setState({ isUpdated: false })
-      console.log('ok');
     }, 1000);
   }
   filter = (value) => {
-    // console.log(value.toUpperCase());
+
     let filteredItems = this.state.cryptoData;
     let newFilteredArray = filteredItems.filter(item => {
       return item.key.toUpperCase().includes(value.toUpperCase())
