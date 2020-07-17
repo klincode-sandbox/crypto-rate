@@ -6,7 +6,7 @@ header {
 
 header img {
   width: 100px;
-  animation: rotate 1s normal 1s forwards ease-in-out;
+  animation: rotate infinite 20s linear;
 }
 
 h1 {
@@ -25,7 +25,8 @@ h1 {
     transform: rotate(0);
   }
 
+
   100% {
-    transform: rotate(130deg);
+    transform: rotate(360deg);
   }
 }
