@@ -25,7 +25,6 @@ class Crypto extends Component {
     return dataToArray
   }
 
-
   getData = () => {
     Axios.get('https://blockchain.info/pl/ticker')
       .then(response => {
@@ -33,11 +32,10 @@ class Crypto extends Component {
         const cryptoDataArray = this.dataToArray(cryptoData);
 
         this.setState({ cryptoData: cryptoDataArray, filteredCryptoData: cryptoDataArray, isUpdated: true })
+        //jeśli jest już założony filtr - uwzględniej te wartość
         this.filter(this.state.filterValue);
       })
   }
-
-
 
   tick = () => {
     this.handleTick = setInterval(
@@ -46,18 +44,19 @@ class Crypto extends Component {
       }, 5000
     )
     //to pewnie można rozwiązać dużo lepiej ?  
-    setInterval(() => {
+    this.handleTick2 = setInterval(() => {
       this.setState({ isUpdated: false })
     }, 1000);
   }
-  filter = (value) => {
 
+  filter = (value) => {
     let filteredItems = this.state.cryptoData;
     let newFilteredArray = filteredItems.filter(item => {
       return item.key.toUpperCase().includes(value.toUpperCase())
     })
     this.setState({ filteredCryptoData: newFilteredArray, filterValue: value })
   }
+
   componentDidMount() {
     this.tick();
     this.getData();
@@ -66,6 +65,7 @@ class Crypto extends Component {
 
   componentWillUnmount() {
     clearInterval(this.handleTick);
+    clearInterval(this.handleTick2);
   }
   componentDidUpdate(prevProps, prevState) {
 
