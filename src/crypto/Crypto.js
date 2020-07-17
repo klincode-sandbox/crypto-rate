@@ -61,6 +61,10 @@ class Crypto extends Component {
     this.getData();
   }
 
+
+  componentWillUnmount() {
+    clearInterval(this.handleTick);
+  }
   componentDidUpdate(prevProps, prevState) {
 
     //jeżeli poprzednia cena była inna od aktualnej zaktualizuj pole status [down,up,equal]
